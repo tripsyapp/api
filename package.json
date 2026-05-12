@@ -1,0 +1,44 @@
+{
+  "name": "tripsy-api-docs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "NO_UPDATE_NOTIFIER=1 docusaurus build",
+    "clear": "NO_UPDATE_NOTIFIER=1 docusaurus clear",
+    "serve": "NO_UPDATE_NOTIFIER=1 docusaurus serve",
+    "start": "NO_UPDATE_NOTIFIER=1 docusaurus start"
+  },
+  "dependencies": {
+    "@docusaurus/core": "^3.7.0",
+    "@docusaurus/preset-classic": "^3.7.0",
+    "@mdx-js/react": "^3.0.0",
+    "clsx": "^2.1.1",
+    "prism-react-renderer": "^2.4.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@docusaurus/module-type-aliases": "^3.7.0",
+    "@docusaurus/tsconfig": "^3.7.0",
+    "@docusaurus/types": "^3.7.0",
+    "typescript": "~5.7.2"
+  },
+  "overrides": {
+    "serialize-javascript": "^7.0.5"
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 3 chrome version",
+      "last 3 firefox version",
+      "last 5 safari version"
+    ]
+  },
+  "engines": {
+    "node": ">=18.0"
+  }
+}
