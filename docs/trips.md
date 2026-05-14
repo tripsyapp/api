@@ -34,6 +34,7 @@ Notes:
 - Includes trips changed directly or through nested documents, emails, permissions, activities, hostings, transportations, and expenses.
 - Collaborator trips are always included in the filtered response.
 - `documents` and `emails` are never embedded in the v2 trip payload.
+- `collaborators_count` is not returned; use `collaborators`.
 
 ```bash
 curl -X GET "https://api.tripsy.app/v2/trips?updatedSince=2026-03-15T00:00:00Z" \
@@ -59,7 +60,6 @@ Success response uses the standard paginated list envelope:
       "ends_at": "2026-06-15",
       "cover_gradient": 3,
       "cover_image_url": null,
-      "collaborators_count": 2,
       "owner": 1,
       "collaborators": 2,
       "has_dates": true,
