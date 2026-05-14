@@ -12,8 +12,6 @@ The Tripsy Public API is exposed through:
 https://api.tripsy.app
 ```
 
-Public URLs on `api.tripsy.app` do **not** include the `/api` prefix.
-
 Examples:
 
 ```text

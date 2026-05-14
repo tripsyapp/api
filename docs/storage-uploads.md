@@ -7,7 +7,7 @@ title: Storage Uploads
 
 ## `POST /v1/storage/uploads`
 
-Creates a temporary backend-signed S3 upload URL.
+Creates a temporary S3 upload URL.
 
 Authentication:
 
@@ -44,7 +44,7 @@ Permissions:
 
 ## Behavior
 
-The backend returns a presigned S3 `PUT` URL. The client uploads bytes directly to S3 using `upload_url` and must send the exact headers returned by this endpoint.
+The API returns a presigned S3 `PUT` URL. The client uploads bytes directly to S3 using `upload_url` and must send the exact headers returned by this endpoint.
 
 Do not send Tripsy auth headers to S3.
 

@@ -7,9 +7,6 @@ title: Trips
 
 ## V2 trip fetch endpoints
 
-The public host exposes v2 routes without the `/api` prefix. For example, clients call
-`https://api.tripsy.app/v2/trips`; the server maps that internally to `/api/v2/trips`.
-
 V2 trip routes are read-only. Use the existing v1 routes for creating, updating, deleting,
 and attaching documents.
 
