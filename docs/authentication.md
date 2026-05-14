@@ -33,7 +33,7 @@ curl -X GET "https://api.tripsy.app/v1/me" \
 - `POST /auth/logout/`
 - `GET|PUT|PATCH /auth/user/`
 - `POST /auth/password/change/`
-- all `/v1/...` routes not listed above as public
+- all `/v1/...` and `/v2/...` routes not listed above as public
 
 ## `POST /auth`
 

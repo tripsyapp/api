@@ -19,6 +19,7 @@ Examples:
 ```text
 https://api.tripsy.app/v1/me
 https://api.tripsy.app/v1/trips
+https://api.tripsy.app/v2/trips
 https://api.tripsy.app/auth
 ```
 
@@ -60,6 +61,8 @@ Most list endpoints return paginated responses:
   "results": []
 }
 ```
+
+`GET /v2/trips` and all `/v2/trip/...` fetch endpoints use the standard paginated list envelope.
 
 ## Field filtering
 
@@ -109,6 +112,24 @@ Some fields may still be omitted based on permissions:
 
 - `GET|POST /v1/trips`
 - `GET|PUT|PATCH|DELETE /v1/trips/{id}`
+
+### Trips v2 fetch-only
+
+- `GET /v2/trips`
+- `GET /v2/trip/{trip_id}/documents`
+- `GET /v2/trip/{trip_id}/emails`
+- `GET /v2/trip/{trip_id}/hostings`
+- `GET /v2/trip/{trip_id}/hosting/{id}`
+- `GET /v2/trip/{trip_id}/hosting/{hosting_id}/documents`
+- `GET /v2/trip/{trip_id}/hosting/{hosting_id}/emails`
+- `GET /v2/trip/{trip_id}/activities`
+- `GET /v2/trip/{trip_id}/activity/{id}`
+- `GET /v2/trip/{trip_id}/activity/{activity_id}/documents`
+- `GET /v2/trip/{trip_id}/activity/{activity_id}/emails`
+- `GET /v2/trip/{trip_id}/transportations`
+- `GET /v2/trip/{trip_id}/transportation/{id}`
+- `GET /v2/trip/{trip_id}/transportation/{transportation_id}/documents`
+- `GET /v2/trip/{trip_id}/transportation/{transportation_id}/emails`
 
 ### Trip subresources
 
