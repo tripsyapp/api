@@ -35,6 +35,7 @@ Notes:
 - Collaborator trips are always included in the filtered response.
 - `documents` and `emails` are never embedded in the v2 trip payload.
 - `collaborators_count` is not returned; use `collaborators`.
+- When `deleted=true` is present, each result contains only `id`.
 
 ```bash
 curl -X GET "https://api.tripsy.app/v2/trips?updatedSince=2026-03-15T00:00:00Z" \
@@ -97,6 +98,7 @@ Notes:
 - `documents` and `emails` are never embedded in v2 child-object list payloads.
 - `updatedSince` includes the object's own `updated_at` changes and related document/email updates.
 - Deleted child objects are returned only when the parent trip is still active and accessible.
+- When `deleted=true` is present, each result contains only `id`.
 - `price` and `currency` may be omitted when the caller cannot see expenses.
 - Transportation objects include `departure_apple_maps_id`, `arrival_apple_maps_id`, and `actual_transport_number`.
 
@@ -149,8 +151,10 @@ Permissions:
 Notes:
 
 - Paginated at 100 objects per page.
+- `deleted=true` optional to return soft-deleted documents or emails instead of active documents or emails.
 - Documents are ordered newest first by creation date.
 - Emails are ordered newest first by email date.
+- When `deleted=true` is present, each result contains only `id`.
 - Trip-level document responses include `activities`, `hostings`, `transportations`, and `temp_read_url`.
 - Trip-level email responses include `activities`, `hostings`, and `transportations`.
 - Nested child objects inside these responses still hide `price` and `currency` when the caller cannot see expenses.
@@ -184,6 +188,8 @@ Permissions:
 Notes:
 
 - Paginated at 100 objects per page.
+- `deleted=true` optional to return soft-deleted documents or emails instead of active documents or emails.
+- When `deleted=true` is present, each result contains only `id`.
 - Child document responses use the document object shape.
 - Child email responses use the automation email detail shape.
 - Unlike trip-level document/email fetches, these responses do not include sibling child-object context.
