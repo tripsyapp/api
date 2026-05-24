@@ -82,7 +82,6 @@ Some fields may still be omitted based on permissions:
 
 - `POST /auth`
 - `POST /v1/auth`
-- `POST /auth/apple`
 - `POST /v1/signup`
 - `POST /auth/login/`
 - `POST /auth/logout/`
