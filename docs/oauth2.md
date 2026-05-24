@@ -5,7 +5,7 @@ title: OAuth2
 
 # OAuth2 Provider
 
-Tripsy supports OAuth2 login using Tripsy email/password credentials. This is additive to `/auth`, `/v1/auth`, and `/auth/apple`.
+Tripsy supports OAuth2 login using Tripsy email/password credentials. This is additive to `/auth` and `/v1/auth`.
 
 ## Endpoints
 
