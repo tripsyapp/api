@@ -29,6 +29,8 @@ Query parameters:
       "id": 303,
       "name": "Flight to Rome",
       "transportation_type": "airplane",
+      "departure_location_type": "airport",
+      "arrival_location_type": "airport",
       "documents": [],
       "emails": []
     }
@@ -58,12 +60,14 @@ Writable fields:
 - `departure_at`
 - `departure_timezone`
 - `departure_address`
+- `departure_location_type`
 - `departure_longitude`
 - `departure_latitude`
 - `arrival_description`
 - `arrival_at`
 - `arrival_timezone`
 - `arrival_address`
+- `arrival_location_type`
 - `arrival_longitude`
 - `arrival_latitude`
 - `company`
@@ -89,6 +93,10 @@ Writable fields:
 - `currency`
 - `departure_apple_maps_id`
 
+`departure_location_type` and `arrival_location_type` are optional category
+slugs for the corresponding locations, such as `restaurant`, `museum`, or a
+custom category slug.
+
 ```bash
 curl -X POST "https://api.tripsy.app/v1/trip/42/transportations" \
   -H "Authorization: Token YOUR_TOKEN_HERE" \
@@ -99,9 +107,11 @@ curl -X POST "https://api.tripsy.app/v1/trip/42/transportations" \
     "departure_description": "JFK",
     "departure_at": "2026-05-31T22:30:00Z",
     "departure_timezone": "America/New_York",
+    "departure_location_type": "airport",
     "arrival_description": "FCO",
     "arrival_at": "2026-06-01T10:30:00Z",
     "arrival_timezone": "Europe/Rome",
+    "arrival_location_type": "airport",
     "company": "ITA Airways",
     "transport_number": "AZ609"
   }'
