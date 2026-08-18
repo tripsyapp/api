@@ -22,7 +22,6 @@ curl -X GET "https://api.tripsy.app/v1/me" \
 
 - `POST /auth`
 - `POST /v1/auth`
-- `POST /auth/apple`
 - `POST /v1/signup`
 - `POST /auth/login/`
 - `POST /auth/password/reset/`
@@ -78,56 +77,6 @@ Typical error:
 ## `POST /v1/auth`
 
 Alias of the same custom token login flow used by the mobile app. Request body and response are the same as `POST /auth`.
-
-## `POST /auth/apple`
-
-Signs in or signs up with Sign in with Apple.
-
-Authentication: public.
-
-Request body:
-
-- `authorization_code` string, required
-- `client_id` string, optional
-- `nonce` string, optional
-- `user` object, optional
-- `email` string, optional
-- `name` string, optional
-- `first_name` string, optional
-- `last_name` string, optional
-
-```bash
-curl -X POST "https://api.tripsy.app/auth/apple" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "authorization_code": "APPLE_AUTHORIZATION_CODE",
-    "client_id": "app.tripsy.ios",
-    "nonce": "NONCE_SENT_TO_APPLE",
-    "user": {
-      "name": {
-        "firstName": "Example",
-        "lastName": "Traveler"
-      },
-      "email": "traveler@example.com"
-    }
-  }'
-```
-
-Success response:
-
-```json
-{
-  "token": "4b7a4b8c9f0d..."
-}
-```
-
-Possible error status codes: `400`, `401`, `409`, `503`.
-
-Important behavior:
-
-- For a brand-new Apple account, Apple must provide an email address.
-- Existing users can be linked by Apple `sub` or by matching email.
-- The API validates the Apple token and cross-checks any client-provided email against the Apple claims.
 
 ## `POST /auth/login/`
 
