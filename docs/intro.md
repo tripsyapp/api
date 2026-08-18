@@ -68,13 +68,12 @@ Trips, hostings, activities, transportations, and expenses support field filteri
 
 ```text
 ?fields=id,name,starts_at
-?fields!=documents,emails
+?fields!=emails
 ```
 
 Some fields may still be omitted based on permissions:
 
 - `price` and `currency` may be hidden if the caller cannot see expenses.
-- `documents` and `emails` may be hidden if the caller cannot see documents.
 
 ## Route Summary
 
@@ -98,8 +97,6 @@ Some fields may still be omitted based on permissions:
 - `DELETE /v1/emails/{id}`
 - `GET /v1/automation/emails`
 - `GET|PUT|PATCH|DELETE /v1/automation/emails/{id}`
-- `GET /v1/documents/{id}/get`
-- `PUT|PATCH /v1/documents/{id}`
 
 ### Storage
 
@@ -113,19 +110,15 @@ Some fields may still be omitted based on permissions:
 ### Trips v2 fetch-only
 
 - `GET /v2/trips`
-- `GET /v2/trip/{trip_id}/documents`
 - `GET /v2/trip/{trip_id}/emails`
 - `GET /v2/trip/{trip_id}/hostings`
 - `GET /v2/trip/{trip_id}/hosting/{id}`
-- `GET /v2/trip/{trip_id}/hosting/{hosting_id}/documents`
 - `GET /v2/trip/{trip_id}/hosting/{hosting_id}/emails`
 - `GET /v2/trip/{trip_id}/activities`
 - `GET /v2/trip/{trip_id}/activity/{id}`
-- `GET /v2/trip/{trip_id}/activity/{activity_id}/documents`
 - `GET /v2/trip/{trip_id}/activity/{activity_id}/emails`
 - `GET /v2/trip/{trip_id}/transportations`
 - `GET /v2/trip/{trip_id}/transportation/{id}`
-- `GET /v2/trip/{trip_id}/transportation/{transportation_id}/documents`
 - `GET /v2/trip/{trip_id}/transportation/{transportation_id}/emails`
 
 ### Trip subresources
@@ -139,5 +132,3 @@ Some fields may still be omitted based on permissions:
 - `GET|POST /v1/trip/{trip_id}/expenses`
 - `GET|PUT|PATCH|DELETE /v1/trip/{trip_id}/expense/{id}`
 - `GET /v1/trip/{trip_id}/collaborators`
-- `POST /v1/trip/{trip_id}/documents`
-- `PUT|PATCH|DELETE /v1/trip/{trip_id}/documents/{document_id}`

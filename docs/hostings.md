@@ -27,7 +27,6 @@ Query parameters:
     {
       "id": 101,
       "name": "Hotel Eden",
-      "documents": [],
       "emails": []
     }
   ]
@@ -61,7 +60,6 @@ Writable fields:
 - `website`
 - `notes`
 - `provider_location_url`
-- `provider_document`
 - `provider_reservation_code`
 - `provider_reservation_description`
 - `google_places_id`
@@ -112,33 +110,3 @@ If `update_trip` is present, the hosting is moved to the new trip and the succes
 Normal update success: full hosting object.
 
 Delete success: `204 No Content`.
-
-## Hosting documents
-
-Routes:
-
-- `POST /v1/trip/{trip_id}/hosting/{hosting_id}/documents`
-- `PUT /v1/trip/{trip_id}/hosting/{hosting_id}/documents/{document_id}`
-- `PATCH /v1/trip/{trip_id}/hosting/{hosting_id}/documents/{document_id}`
-- `DELETE /v1/trip/{trip_id}/hosting/{hosting_id}/documents/{document_id}`
-
-Authentication: required.
-
-Permissions: caller must be allowed to edit trip documents.
-
-Create body:
-
-- `url`
-- `thumb_url`
-- `favicon_url`
-- `file_type`
-- `title`
-- `description`
-
-Update body:
-
-- `title`
-
-Create/update success response: document object.
-
-Delete success: empty `200 OK`.

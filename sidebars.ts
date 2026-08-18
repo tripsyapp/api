@@ -18,7 +18,6 @@ const sidebars: SidebarsConfig = {
         'activities',
         'transportations',
         'expenses-and-collaborators',
-        'documents',
       ],
     },
     'shared-objects',

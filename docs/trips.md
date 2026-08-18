@@ -7,8 +7,7 @@ title: Trips
 
 ## V2 trip fetch endpoints
 
-V2 trip routes are read-only. Use the existing v1 routes for creating, updating, deleting,
-and attaching documents.
+V2 trip routes are read-only. Use the existing v1 routes for creating, updating, and deleting.
 
 ## `GET /v2/trips`
 
@@ -31,9 +30,9 @@ Notes:
 - Paginated at 100 trips per page.
 - Accepts timestamps such as `2026-03-17T00:00:00Z`.
 - The implementation subtracts 2 days before filtering `updatedSince`.
-- Includes trips changed directly or through nested documents, emails, permissions, activities, hostings, transportations, and expenses.
+- Includes trips changed directly or through nested emails, permissions, activities, hostings, transportations, and expenses.
 - Collaborator trips are always included in the filtered response.
-- `documents` and `emails` are never embedded in the v2 trip payload.
+- `emails` are never embedded in the v2 trip payload.
 - `collaborators_count` is not returned; use `collaborators`.
 - When `deleted=true` is present, each result contains only `id`.
 
@@ -95,8 +94,8 @@ Query parameters:
 Notes:
 
 - Paginated at 100 objects per page.
-- `documents` and `emails` are never embedded in v2 child-object list payloads.
-- `updatedSince` includes the object's own `updated_at` changes and related document/email updates.
+- `emails` are never embedded in v2 child-object list payloads.
+- `updatedSince` includes the object's own `updated_at` changes and related email updates.
 - Deleted child objects are returned only when the parent trip is still active and accessible.
 - When `deleted=true` is present, each result contains only `id`.
 - `price` and `currency` may be omitted when the caller cannot see expenses.
@@ -116,9 +115,9 @@ curl -X GET "https://api.tripsy.app/v2/trip/42/transportations?transportationTyp
 Success response:
 
 - Paginated list envelope.
-- Hostings use the same fields as the hosting object, except `documents` and `emails`.
-- Activities use the same fields as the activity object, except `documents` and `emails`.
-- Transportations use the same fields as the transportation object, except `documents` and `emails`.
+- Hostings use the same fields as the hosting object, except `emails`.
+- Activities use the same fields as the activity object, except `emails`.
+- Transportations use the same fields as the transportation object, except `emails`.
 
 ## `GET /v2/trip/{trip_id}/hosting/{id}`
 ## `GET /v2/trip/{trip_id}/activity/{id}`
@@ -134,10 +133,9 @@ Success response: object response without the pagination envelope.
 
 Failure response: `404 Not Found` when the object does not exist, is deleted, is not in the trip, or the trip is not accessible.
 
-## `GET /v2/trip/{trip_id}/documents`
 ## `GET /v2/trip/{trip_id}/emails`
 
-Fetches documents or emails attached to a trip. Trip-level v2 fetches include objects attached
+Fetches emails attached to a trip. Trip-level v2 fetches include objects attached
 directly to the trip and objects attached to the trip's hostings, activities, and
 transportations.
 
@@ -146,66 +144,49 @@ Authentication: required.
 Permissions:
 
 - Trip must be accessible to the caller.
-- Caller must be allowed to see trip documents.
 
 Notes:
 
 - Paginated at 100 objects per page.
-- `deleted=true` optional to return soft-deleted documents or emails instead of active documents or emails.
-- Documents are ordered newest first by creation date.
+- `deleted=true` optional to return soft-deleted emails instead of active emails.
 - Emails are ordered newest first by email date.
 - When `deleted=true` is present, each result contains only `id`.
-- Trip-level document responses include `activities`, `hostings`, `transportations`, and `temp_read_url`.
 - Trip-level email responses include `activities`, `hostings`, and `transportations`.
 - Nested child objects inside these responses still hide `price` and `currency` when the caller cannot see expenses.
 
 ```bash
-curl -X GET "https://api.tripsy.app/v2/trip/42/documents" \
-  -H "Authorization: Token YOUR_TOKEN_HERE"
-
 curl -X GET "https://api.tripsy.app/v2/trip/42/emails" \
   -H "Authorization: Token YOUR_TOKEN_HERE"
 ```
 
-Failure response: `403 Forbidden` when the trip is not accessible or the caller cannot see documents.
+Failure response: `403 Forbidden` when the trip is not accessible.
 
-## `GET /v2/trip/{trip_id}/hosting/{hosting_id}/documents`
 ## `GET /v2/trip/{trip_id}/hosting/{hosting_id}/emails`
-## `GET /v2/trip/{trip_id}/activity/{activity_id}/documents`
 ## `GET /v2/trip/{trip_id}/activity/{activity_id}/emails`
-## `GET /v2/trip/{trip_id}/transportation/{transportation_id}/documents`
 ## `GET /v2/trip/{trip_id}/transportation/{transportation_id}/emails`
 
-Fetches documents or emails attached to one child object only.
+Fetches emails attached to one child object only.
 
 Authentication: required.
 
 Permissions:
 
 - Trip must be accessible to the caller.
-- Caller must be allowed to see trip documents.
 
 Notes:
 
 - Paginated at 100 objects per page.
-- `deleted=true` optional to return soft-deleted documents or emails instead of active documents or emails.
+- `deleted=true` optional to return soft-deleted emails instead of active emails.
 - When `deleted=true` is present, each result contains only `id`.
-- Child document responses use the document object shape.
 - Child email responses use the automation email detail shape.
-- Unlike trip-level document/email fetches, these responses do not include sibling child-object context.
+- Unlike trip-level email fetches, these responses do not include sibling child-object context.
 
 ```bash
-curl -X GET "https://api.tripsy.app/v2/trip/42/hosting/101/documents" \
-  -H "Authorization: Token YOUR_TOKEN_HERE"
-
 curl -X GET "https://api.tripsy.app/v2/trip/42/activity/202/emails" \
-  -H "Authorization: Token YOUR_TOKEN_HERE"
-
-curl -X GET "https://api.tripsy.app/v2/trip/42/transportation/303/documents" \
   -H "Authorization: Token YOUR_TOKEN_HERE"
 ```
 
-Failure response: `403 Forbidden` when the trip or child object is not accessible, or the caller cannot see documents.
+Failure response: `403 Forbidden` when the trip or child object is not accessible.
 
 ## `GET /v1/trips`
 
@@ -244,7 +225,6 @@ Success response uses the custom trips envelope:
       "timezone": "Europe/Rome",
       "starts_at": "2026-06-01",
       "ends_at": "2026-06-15",
-      "documents": [],
       "emails": []
     }
   ]

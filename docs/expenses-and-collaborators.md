@@ -102,8 +102,6 @@ Permissions: trip must be accessible to the caller.
         "can_edit": true,
         "can_see_expenses": true,
         "can_edit_expenses": true,
-        "can_see_documents": true,
-        "can_edit_documents": true,
         "is_travelling": true,
         "receive_notifications": true
       },

@@ -89,25 +89,6 @@ Detail item:
 }
 ```
 
-## Document object
-
-```json
-{
-  "id": 280258,
-  "created_at": "2026-03-17T14:30:00Z",
-  "title": "Boarding pass",
-  "description": "Uploaded from the app",
-  "owner": {
-    "id": 1,
-    "name": "Test User"
-  },
-  "file_type": "application/pdf",
-  "url": "https://cdn.example.com/boarding-pass.pdf",
-  "thumb_url": null,
-  "favicon_url": null
-}
-```
-
 ## Trip object
 
 ```json
@@ -125,7 +106,6 @@ Detail item:
   "collaborators_count": 2,
   "owner": 1,
   "collaborators": 2,
-  "documents": [],
   "has_dates": true,
   "number_of_days": 0
 }
@@ -160,7 +140,6 @@ Detail item:
   "notes": "",
   "provider_reservation_code": "ABC123",
   "emails": [],
-  "documents": [],
   "price": 1200,
   "currency": "EUR",
   "created_at": "2026-03-17T14:30:00Z",
@@ -194,7 +173,6 @@ Detail item:
   "longitude": 12.4922,
   "latitude": 41.8902,
   "timezone": "Europe/Rome",
-  "documents": [],
   "emails": [],
   "price": 45,
   "currency": "EUR",
@@ -232,7 +210,6 @@ Detail item:
   "departure_terminal": "4",
   "departure_gate": "B22",
   "arrival_terminal": "3",
-  "documents": [],
   "emails": [],
   "price": 890,
   "currency": "USD",
@@ -268,8 +245,6 @@ Detail item:
     "can_edit": true,
     "can_see_expenses": true,
     "can_edit_expenses": true,
-    "can_see_documents": true,
-    "can_edit_documents": true,
     "is_travelling": true,
     "receive_notifications": true
   },

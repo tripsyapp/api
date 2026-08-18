@@ -3,7 +3,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'Tripsy Public API',
-  tagline: 'Build integrations with Tripsy trips, itinerary items, documents, and account data.',
+  tagline: 'Build integrations with Tripsy trips, itinerary items, and account data.',
   favicon: 'img/logo.svg',
 
   url: 'https://docs.api.tripsy.app',

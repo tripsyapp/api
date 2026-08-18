@@ -29,7 +29,6 @@ Query parameters:
       "id": 303,
       "name": "Flight to Rome",
       "transportation_type": "airplane",
-      "documents": [],
       "emails": []
     }
   ]
@@ -81,7 +80,6 @@ Writable fields:
 - `flight_aware_identifier`
 - `automatic_updates`
 - `provider_url`
-- `provider_document`
 - `provider_reservation_code`
 - `provider_reservation_description`
 - `distance_meters`
@@ -132,18 +130,3 @@ If `update_trip` is present, the transportation item is moved to the new trip an
 Normal update success: full transportation object.
 
 Delete success: `204 No Content`.
-
-## Transportation documents
-
-Routes:
-
-- `POST /v1/trip/{trip_id}/transportation/{transportation_id}/documents`
-- `PUT /v1/trip/{trip_id}/transportation/{transportation_id}/documents/{document_id}`
-- `PATCH /v1/trip/{trip_id}/transportation/{transportation_id}/documents/{document_id}`
-- `DELETE /v1/trip/{trip_id}/transportation/{transportation_id}/documents/{document_id}`
-
-Authentication: required.
-
-Permissions: caller must be allowed to edit trip documents.
-
-Request and response behavior is the same as the hosting-document endpoints.

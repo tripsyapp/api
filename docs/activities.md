@@ -29,7 +29,6 @@ Query parameters:
       "id": 202,
       "name": "Colosseum Tour",
       "activity_type": "sightseeing",
-      "documents": [],
       "emails": []
     }
   ]
@@ -65,7 +64,6 @@ Writable fields:
 - `apple_maps_id`
 - `timezone`
 - `provider_location_url`
-- `provider_document`
 - `provider_reservation_code`
 - `provider_reservation_description`
 - `google_places_id`
@@ -111,18 +109,3 @@ If `update_trip` is present, the activity is moved to the new trip and the succe
 Normal update success: full activity object.
 
 Delete success: `204 No Content`.
-
-## Activity documents
-
-Routes:
-
-- `POST /v1/trip/{trip_id}/activity/{activity_id}/documents`
-- `PUT /v1/trip/{trip_id}/activity/{activity_id}/documents/{document_id}`
-- `PATCH /v1/trip/{trip_id}/activity/{activity_id}/documents/{document_id}`
-- `DELETE /v1/trip/{trip_id}/activity/{activity_id}/documents/{document_id}`
-
-Authentication: required.
-
-Permissions: caller must be allowed to edit trip documents.
-
-Request and response behavior is the same as the hosting-document endpoints.
