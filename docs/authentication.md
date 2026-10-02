@@ -5,11 +5,13 @@ title: Authentication
 
 # Authentication
 
-Most routes require token authentication:
+Most routes require authentication. API tokens use:
 
 ```http
 Authorization: Token YOUR_TOKEN_HERE
 ```
+
+OAuth access tokens instead use `Authorization: Bearer ACCESS_TOKEN`. Obtain tokens from the [OAuth authorization server](./oauth2.md). The API does not currently distinguish read-only and write-only OAuth access to itinerary routes; normal object permissions still apply.
 
 Example:
 
@@ -26,13 +28,15 @@ curl -X GET "https://api.tripsy.app/v1/me" \
 - `POST /auth/login/`
 - `POST /auth/password/reset/`
 - `POST /auth/password/reset/confirm/`
+- `GET /v1/emails/{hash}/verify` (verification link)
+- `POST /v1/storage/uploads` for public profile photos and trip covers only
 
 ## Authenticated routes
 
 - `POST /auth/logout/`
 - `GET|PUT|PATCH /auth/user/`
 - `POST /auth/password/change/`
-- all `/v1/...` and `/v2/...` routes not listed above as public
+- all `/v1/...` and `/v2/...` routes not listed above as public; private document upload preparation always requires authentication
 
 ## `POST /auth`
 

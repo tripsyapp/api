@@ -135,58 +135,13 @@ Failure response: `404 Not Found` when the object does not exist, is deleted, is
 
 ## `GET /v2/trip/{trip_id}/emails`
 
-Fetches emails attached to a trip. Trip-level v2 fetches include objects attached
-directly to the trip and objects attached to the trip's hostings, activities, and
-transportations.
-
-Authentication: required.
-
-Permissions:
-
-- Trip must be accessible to the caller.
-
-Notes:
-
-- Paginated at 100 objects per page.
-- `deleted=true` optional to return soft-deleted emails instead of active emails.
-- Emails are ordered newest first by email date.
-- When `deleted=true` is present, each result contains only `id`.
-- Trip-level email responses include `activities`, `hostings`, and `transportations`.
-- Nested child objects inside these responses still hide `price` and `currency` when the caller cannot see expenses.
-
-```bash
-curl -X GET "https://api.tripsy.app/v2/trip/42/emails" \
-  -H "Authorization: Token YOUR_TOKEN_HERE"
-```
-
-Failure response: `403 Forbidden` when the trip is not accessible.
+Use the [email list/detail routes](./email-and-inbox.md#attached-booking-emails) and [document list/detail routes](./documents.md) to retrieve attachments. Trip-level routes aggregate attachments from the trip and its active itinerary. These reads require document visibility permission and active Pro for the trip owner; permitted collaborators do not need their own Pro.
 
 ## `GET /v2/trip/{trip_id}/hosting/{hosting_id}/emails`
 ## `GET /v2/trip/{trip_id}/activity/{activity_id}/emails`
 ## `GET /v2/trip/{trip_id}/transportation/{transportation_id}/emails`
 
-Fetches emails attached to one child object only.
-
-Authentication: required.
-
-Permissions:
-
-- Trip must be accessible to the caller.
-
-Notes:
-
-- Paginated at 100 objects per page.
-- `deleted=true` optional to return soft-deleted emails instead of active emails.
-- When `deleted=true` is present, each result contains only `id`.
-- Child email responses use the automation email detail shape.
-- Unlike trip-level email fetches, these responses do not include sibling child-object context.
-
-```bash
-curl -X GET "https://api.tripsy.app/v2/trip/42/activity/202/emails" \
-  -H "Authorization: Token YOUR_TOKEN_HERE"
-```
-
-Failure response: `403 Forbidden` when the trip or child object is not accessible.
+See the [attached booking-email guide](./email-and-inbox.md#attached-booking-emails) for exact child scope, permissions, pagination, and individual retrieval. Existing email section anchors remain available here.
 
 ## `GET /v1/trips`
 
@@ -250,6 +205,9 @@ Writable fields:
 - `cover_image_url`
 - `has_dates`
 - `number_of_days`
+- `guest_invites` (create only): an array of objects with numeric `user_id` and `permissions` for known guests; use [guest management](./guests.md) for existing trips
+
+`has_dates=false` is authoritative: ignore stored start/end date values in that case.
 
 ```bash
 curl -X POST "https://api.tripsy.app/v1/trips" \
@@ -287,7 +245,7 @@ Updates a trip.
 
 Authentication: required.
 
-Writable fields are the same trip fields used on create.
+Writable fields are the same trip fields used on create, except `guest_invites`, which is processed only during creation.
 
 For uploaded trip cover images, call `POST /v1/storage/uploads` with `purpose=trip_cover`, upload the bytes to S3, then save the returned `public_url` into `cover_image_url`.
 

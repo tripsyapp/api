@@ -7,6 +7,9 @@ const sidebars: SidebarsConfig = {
     'oauth2',
     'accounts',
     'storage-uploads',
+    'documents',
+    'categories',
+    'guests',
     'email-and-inbox',
     'trips',
     {

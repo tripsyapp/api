@@ -28,3 +28,14 @@ docs.api.tripsy.app
 ```
 
 In GitHub repository settings, configure Pages to use **GitHub Actions** as the source.
+
+
+## Keeping the reference current
+
+Audit public routes against the current `tripsyapp/core` implementation: the
+`api.tripsy.app` Nginx allowlist, `tripsy/api/urls.py`, `tripsy/api/urls_v2.py`, and
+handler methods, serializers, and permission checks. An internal Django route
+alone does not make an endpoint part of the supported public API. Keep the
+Overview route summary and detailed guides synchronized, then run the production
+build to validate navigation and links. Native authentication and billing
+implementation details are outside this public reference.

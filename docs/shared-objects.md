@@ -161,7 +161,7 @@ Detail item:
   "internal_identifier": "activity_202_local",
   "trip": 42,
   "hidden": false,
-  "activity_type": "sightseeing",
+  "activity_type": "tour",
   "period": null,
   "starts_at": "2026-06-03T09:00:00Z",
   "ends_at": "2026-06-03T11:00:00Z",
