@@ -28,7 +28,7 @@ Query parameters:
     {
       "id": 202,
       "name": "Colosseum Tour",
-      "activity_type": "sightseeing",
+      "activity_type": "tour",
       "emails": []
     }
   ]
@@ -42,6 +42,8 @@ Creates an activity in a trip.
 Authentication: required.
 
 Permissions: trip must be editable by the caller.
+
+Use a documented built-in `activity_type` (for example, `tour`) or a visible [custom category slug](./categories.md). Custom slugs apply only to activities.
 
 Writable fields:
 
@@ -76,10 +78,12 @@ curl -X POST "https://api.tripsy.app/v1/trip/42/activities" \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Colosseum Tour",
-    "activity_type": "sightseeing",
+    "activity_type": "tour",
     "starts_at": "2026-06-03T09:00:00Z",
     "ends_at": "2026-06-03T11:00:00Z",
     "address": "Piazza del Colosseo, Rome, Italy",
+    "latitude": 41.8902,
+    "longitude": 12.4922,
     "timezone": "Europe/Rome"
   }'
 ```

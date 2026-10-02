@@ -100,8 +100,11 @@ Permissions: trip must be accessible to the caller.
       "permissions": {
         "is_owner": true,
         "can_edit": true,
+        "can_add_guests": true,
         "can_see_expenses": true,
         "can_edit_expenses": true,
+        "can_see_documents": true,
+        "can_edit_documents": true,
         "is_travelling": true,
         "receive_notifications": true
       },
@@ -111,4 +114,4 @@ Permissions: trip must be accessible to the caller.
 }
 ```
 
-The list includes the owner, edit collaborators, view collaborators, and users with pending invitations. `joined=false` means the user has a pending invitation and has not yet joined the trip.
+The list includes the owner, edit collaborators, and view collaborators. Pending invitees are visible only to callers with guest-management permission. `joined=false` means the user has a pending invitation and has not yet joined the trip. See [Guests and permissions](./guests.md) for invitations, permission updates, removal, and account favorites.

@@ -100,6 +100,7 @@ Writable fields:
 Notes:
 
 - The API always updates `last_activity_date`.
+- Subscription fields in profile responses are not writable by OAuth clients.
 - `email` must not be blank.
 - `email` must not match another user primary email.
 - `email` must not match another user alternative email.

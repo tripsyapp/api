@@ -23,7 +23,7 @@ https://api.tripsy.app/auth
 
 ## Content types
 
-Request bodies use `application/json` unless an endpoint says otherwise. Response bodies are JSON.
+Request bodies use `application/json` unless an endpoint says otherwise. Response bodies are generally JSON; some successful updates and deletes have an empty body, and email verification links render an HTML page.
 
 ## Datetimes
 
@@ -60,7 +60,7 @@ Most list endpoints return paginated responses:
 }
 ```
 
-`GET /v2/trips` and all `/v2/trip/...` fetch endpoints use the standard paginated list envelope.
+`GET /v2/trips` and `/v2/trip/...` list endpoints use the standard paginated envelope. Detail endpoints return a single object. `GET /v1/categories` returns an unpaginated `results` envelope.
 
 ## Field filtering
 
@@ -74,8 +74,11 @@ Trips, hostings, activities, transportations, and expenses support field filteri
 Some fields may still be omitted based on permissions:
 
 - `price` and `currency` may be hidden if the caller cannot see expenses.
+- Document and booking-email content requires document visibility permission. Owners need active Pro; permitted collaborators do not need their own Pro.
 
 ## Route Summary
+
+Use the public paths below; do not add the internal `/api/` prefix. The public virtual-host configuration must be deployed alongside the backend when new paths are introduced.
 
 ### Auth and account
 
@@ -90,38 +93,42 @@ Some fields may still be omitted based on permissions:
 - `POST /auth/password/change/`
 - `GET|PUT|PATCH /v1/me`
 
+OAuth discovery, registration, authorization, token, revocation, introspection, and user info use the separate [authorization server](./oauth2.md).
+
 ### Email and inbox
 
 - `GET /v1/emails`
 - `POST /v1/emails/add`
 - `DELETE /v1/emails/{id}`
+- `GET /v1/emails/{hash}/verify`
 - `GET /v1/automation/emails`
 - `GET|PUT|PATCH|DELETE /v1/automation/emails/{id}`
 
-### Storage
+### Storage and document metadata
 
 - `POST /v1/storage/uploads`
+- `GET /v1/documents/{id}/get`
+- `PUT|PATCH /v1/documents/{id}`
+
+See [Documents](./documents.md) for the complete attachment and upload flows.
+
+### Categories and guests
+
+- `GET|POST /v1/categories`
+- `GET|PUT|PATCH|DELETE /v1/categories/{id}`
+- `GET /v1/guests/favorites`
+- `POST /v1/guests/invite`
+- `GET /v1/trip/{trip_id}/collaborators`
+- `GET|DELETE /v1/trip/{trip_id}/collaborator/{user_id}`
+- `PATCH /v1/trip/{trip_id}/collaborator/{user_id}/permissions`
 
 ### Trips
 
 - `GET|POST /v1/trips`
 - `GET|PUT|PATCH|DELETE /v1/trips/{id}`
-
-### Trips v2 fetch-only
-
 - `GET /v2/trips`
-- `GET /v2/trip/{trip_id}/emails`
-- `GET /v2/trip/{trip_id}/hostings`
-- `GET /v2/trip/{trip_id}/hosting/{id}`
-- `GET /v2/trip/{trip_id}/hosting/{hosting_id}/emails`
-- `GET /v2/trip/{trip_id}/activities`
-- `GET /v2/trip/{trip_id}/activity/{id}`
-- `GET /v2/trip/{trip_id}/activity/{activity_id}/emails`
-- `GET /v2/trip/{trip_id}/transportations`
-- `GET /v2/trip/{trip_id}/transportation/{id}`
-- `GET /v2/trip/{trip_id}/transportation/{transportation_id}/emails`
 
-### Trip subresources
+### Itinerary objects
 
 - `GET|POST /v1/trip/{trip_id}/hostings`
 - `GET|PUT|PATCH|DELETE /v1/trip/{trip_id}/hosting/{id}`
@@ -131,4 +138,42 @@ Some fields may still be omitted based on permissions:
 - `GET|PUT|PATCH|DELETE /v1/trip/{trip_id}/transportation/{id}`
 - `GET|POST /v1/trip/{trip_id}/expenses`
 - `GET|PUT|PATCH|DELETE /v1/trip/{trip_id}/expense/{id}`
-- `GET /v1/trip/{trip_id}/collaborators`
+- `GET /v2/trip/{trip_id}/hostings`
+- `GET /v2/trip/{trip_id}/hosting/{id}`
+- `GET /v2/trip/{trip_id}/activities`
+- `GET /v2/trip/{trip_id}/activity/{id}`
+- `GET /v2/trip/{trip_id}/transportations`
+- `GET /v2/trip/{trip_id}/transportation/{id}`
+
+### Document attachment writes
+
+- `POST /v1/trip/{trip_id}/documents`
+- `PUT|PATCH|DELETE /v1/trip/{trip_id}/documents/{id}`
+- `POST /v1/trip/{trip_id}/activity/{activity_id}/documents`
+- `PUT|PATCH|DELETE /v1/trip/{trip_id}/activity/{activity_id}/documents/{id}`
+- `POST /v1/trip/{trip_id}/hosting/{hosting_id}/documents`
+- `PUT|PATCH|DELETE /v1/trip/{trip_id}/hosting/{hosting_id}/documents/{id}`
+- `POST /v1/trip/{trip_id}/transportation/{transportation_id}/documents`
+- `PUT|PATCH|DELETE /v1/trip/{trip_id}/transportation/{transportation_id}/documents/{id}`
+
+### Document reads
+
+- `GET /v2/trip/{trip_id}/documents`
+- `GET /v2/trip/{trip_id}/documents/{id}`
+- `GET /v2/trip/{trip_id}/activity/{activity_id}/documents`
+- `GET /v2/trip/{trip_id}/activity/{activity_id}/documents/{id}`
+- `GET /v2/trip/{trip_id}/hosting/{hosting_id}/documents`
+- `GET /v2/trip/{trip_id}/hosting/{hosting_id}/documents/{id}`
+- `GET /v2/trip/{trip_id}/transportation/{transportation_id}/documents`
+- `GET /v2/trip/{trip_id}/transportation/{transportation_id}/documents/{id}`
+
+### Attached booking-email reads
+
+- `GET /v2/trip/{trip_id}/emails`
+- `GET /v2/trip/{trip_id}/emails/{id}`
+- `GET /v2/trip/{trip_id}/activity/{activity_id}/emails`
+- `GET /v2/trip/{trip_id}/activity/{activity_id}/emails/{id}`
+- `GET /v2/trip/{trip_id}/hosting/{hosting_id}/emails`
+- `GET /v2/trip/{trip_id}/hosting/{hosting_id}/emails/{id}`
+- `GET /v2/trip/{trip_id}/transportation/{transportation_id}/emails`
+- `GET /v2/trip/{trip_id}/transportation/{transportation_id}/emails/{id}`
